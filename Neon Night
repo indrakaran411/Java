@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+public class NeonNightscape {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Welcome to Neon Nightscape!");
+        System.out.println("You find yourself in a futuristic city illuminated by neon lights.");
+        System.out.println("The city is bustling with activity, but danger lurks in the shadows.");
+        
+        System.out.println("\nYou stumble upon a gang confrontation.");
+        System.out.println("What do you do?");
+        System.out.println("1. Intervene and stop the fight");
+        System.out.println("2. Sneak past unnoticed");
+        
+        int choice = scanner.nextInt();
+        
+        switch (choice) {
+            case 1:
+                System.out.println("Your intervention brings peace to the streets!");
+                break;
+            case 2:
+                System.out.println("You sneak past without attracting attention.");
+                break;
+            default:
+                System.out.println("Invalid choice. You become a target!");
+                break;
+        }
+        
+        scanner.close();
+    }
+}

@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+public class MysticMayhem {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Welcome to Mystic Mayhem!");
+        System.out.println("You are a sorcerer in a realm of magic and mystery.");
+        System.out.println("Your powers are unparalleled, but so are your enemies.");
+        
+        System.out.println("\nYou encounter a dragon blocking your path.");
+        System.out.println("What do you do?");
+        System.out.println("1. Cast a powerful spell");
+        System.out.println("2. Attempt to reason with the dragon");
+        
+        int choice = scanner.nextInt();
+        
+        switch (choice) {
+            case 1:
+                System.out.println("Your spell defeats the dragon!");
+                break;
+            case 2:
+                System.out.println("The dragon listens to your plea and allows you to pass.");
+                break;
+            default:
+                System.out.println("Invalid choice. The dragon attacks!");
+                break;
+        }
+        
+        scanner.close();
+    }
+}

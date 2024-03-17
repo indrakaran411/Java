@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+public class GalacticConquest {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Welcome to Galactic Conquest!");
+        System.out.println("You are the commander of a fleet of starships.");
+        System.out.println("Your mission is to conquer the galaxy!");
+        
+        System.out.println("\nYou encounter an enemy fleet.");
+        System.out.println("What do you do?");
+        System.out.println("1. Engage in battle");
+        System.out.println("2. Negotiate for peace");
+        
+        int choice = scanner.nextInt();
+        
+        switch (choice) {
+            case 1:
+                System.out.println("You engage in battle and emerge victorious!");
+                break;
+            case 2:
+                System.out.println("You negotiate for peace and avoid conflict.");
+                break;
+            default:
+                System.out.println("Invalid choice. The enemy attacks while you hesitate!");
+                break;
+        }
+        
+        scanner.close();
+    }
+}
