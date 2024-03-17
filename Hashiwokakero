@@ -1,0 +1,92 @@
+import java.util.*;
+
+public class Hashiwokakero {
+
+    static class Point {
+        int x, y;
+        Point(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    static boolean isSafe(int[][] grid, int x, int y, int n) {
+        return (x >= 0 && x < n && y >= 0 && y < n && grid[x][y] == 0);
+    }
+
+    static boolean solveHashiwokakeroUtil(int[][] grid, int[][] bridges, int x, int y, int n) {
+        if (x == n) {
+            return true;
+        }
+
+        if (y == n) {
+            return solveHashiwokakeroUtil(grid, bridges, x + 1, 0, n);
+        }
+
+        if (grid[x][y] != 0) {
+            return solveHashiwokakeroUtil(grid, bridges, x, y + 1, n);
+        }
+
+        for (int i = 0; i < 4; i++) {
+            int nx = x + dx[i];
+            int ny = y + dy[i];
+
+            if (isSafe(grid, nx, ny, n)) {
+                if (bridges[x][y] == 0 || bridges[x][y] == 2) {
+                    grid[x][y] = 1;
+                    grid[nx][ny] = 1;
+                    if (solveHashiwokakeroUtil(grid, bridges, x, y + 1, n)) {
+                        return true;
+                    }
+                    grid[x][y] = 0;
+                    grid[nx][ny] = 0;
+                }
+
+                if (bridges[x][y] == 0 || bridges[x][y] == 1) {
+                    grid[x][y] = 2;
+                    grid[nx][ny] = 2;
+                    if (solveHashiwokakeroUtil(grid, bridges, x, y + 1, n)) {
+                        return true;
+                    }
+                    grid[x][y] = 0;
+                    grid[nx][ny] = 0;
+                }
+            }
+        }
+        return false;
+    }
+
+    static boolean solveHashiwokakero(int[][] bridges, int n) {
+        int[][] grid = new int[n][n];
+        return solveHashiwokakeroUtil(grid, bridges, 0, 0, n);
+    }
+
+    static void printGrid(int[][] grid) {
+        for (int[] row : grid) {
+            for (int cell : row) {
+                System.out.print(cell == 0 ? "." : cell == 1 ? "-" : "|");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        int n = 5; // Size of the grid
+        int[][] bridges = {
+            {0, 0, 1, 0, 0},
+            {0, 0, 0, 0, 0},
+            {0, 2, 0, 0, 0},
+            {0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0}
+        };
+
+        if (solveHashiwokakero(bridges, n)) {
+            printGrid(bridges);
+        } else {
+            System.out.println("No solution exists");
+        }
+    }
+
+    static int[] dx = {0, 1, 0, -1};
+    static int[] dy = {1, 0, -1, 0};
+}
