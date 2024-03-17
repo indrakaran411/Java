@@ -1,0 +1,69 @@
+import java.util.Scanner;
+
+public class CyberneticChaos {
+    private static final int MAX_ROUNDS = 10;
+    private static int playerScore = 0;
+    private static int computerScore = 0;
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Welcome to Cybernetic Chaos!");
+
+        for (int round = 1; round <= MAX_ROUNDS; round++) {
+            System.out.println("\nRound " + round);
+            System.out.println("Choose your action (1: Attack, 2: Defend, 3: Special):");
+            int playerAction = scanner.nextInt();
+
+            int computerAction = (int) (Math.random() * 3) + 1;
+
+            System.out.println("Computer chooses: " + getActionName(computerAction));
+
+            int result = determineResult(playerAction, computerAction);
+            if (result == 1) {
+                System.out.println("You win this round!");
+                playerScore++;
+            } else if (result == -1) {
+                System.out.println("Computer wins this round!");
+                computerScore++;
+            } else {
+                System.out.println("It's a draw!");
+            }
+        }
+
+        System.out.println("\nGame Over!");
+        System.out.println("Your score: " + playerScore);
+        System.out.println("Computer's score: " + computerScore);
+        if (playerScore > computerScore) {
+            System.out.println("Congratulations! You win!");
+        } else if (computerScore > playerScore) {
+            System.out.println("Computer wins! Better luck next time!");
+        } else {
+            System.out.println("It's a tie!");
+        }
+    }
+
+    private static String getActionName(int action) {
+        switch (action) {
+            case 1:
+                return "Attack";
+            case 2:
+                return "Defend";
+            case 3:
+                return "Special";
+            default:
+                return "Invalid";
+        }
+    }
+
+    private static int determineResult(int playerAction, int computerAction) {
+        if (playerAction == computerAction) {
+            return 0; // Draw
+        } else if ((playerAction == 1 && computerAction == 2) ||
+                   (playerAction == 2 && computerAction == 3) ||
+                   (playerAction == 3 && computerAction == 1)) {
+            return 1; // Player wins
+        } else {
+            return -1; // Computer wins
+        }
+    }
+}
